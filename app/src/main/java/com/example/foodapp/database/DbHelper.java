@@ -7,66 +7,79 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
-    Context context;
+    private static final String DATABASE_NAME = "APP_FOOD";
+    private static final int DATABASE_VERSION = 1;
 
-    public DbHelper(Context context) {
-        super(context, null, null,1);
+    private static final String TABLE_ADMIN = "Admin";
+    private static final String TABLE_USER = "User";
+    private static final String TABLE_CATEGORY = "Category";
+    private static final String TABLE_PRODUCT = "Product";
+    private static final String TABLE_ORDERS = "Orders";
+    private static final String TABLE_NOTIFICATION = "Notification";
+
+    private static final String CREATE_TABLE_ADMIN = "CREATE TABLE " + TABLE_ADMIN + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "avatar TEXT," +
+            "phone TEXT)";
+
+    private static final String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_USER + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "phone TEXT," +
+            "avatar TEXT," +
+            "orderID TEXT)";
+
+    private static final String CREATE_TABLE_CATEGORY = "CREATE TABLE " + TABLE_CATEGORY + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "name TEXT," +
+            "description TEXT)";
+
+    private static final String CREATE_TABLE_PRODUCT = "CREATE TABLE " + TABLE_PRODUCT + " (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "categoryId INTEGER," +
+            "name TEXT," +
+            "price REAL," +
+            "image TEXT," +
+            "description TEXT," +
+            "FOREIGN KEY (categoryId) REFERENCES " + TABLE_CATEGORY + "(id))";
+
+    private static final String CREATE_TABLE_ORDERS = "CREATE TABLE " + TABLE_ORDERS + " (" +
+            "orderID TEXT PRIMARY KEY," +
+            "total REAL," +
+            "userID INTEGER," +
+            "FOREIGN KEY (userID) REFERENCES " + TABLE_USER + "(id))";
+
+    private static final String CREATE_TABLE_NOTIFICATION = "CREATE TABLE " + TABLE_NOTIFICATION + " (" +
+            "notificationId INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "content TEXT)";
+
+    public DbHelper(@Nullable Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL(CREATE_TABLE_ADMIN);
+        db.execSQL(CREATE_TABLE_USER);
+        db.execSQL(CREATE_TABLE_CATEGORY);
+        db.execSQL(CREATE_TABLE_PRODUCT);
+        db.execSQL(CREATE_TABLE_ORDERS);
+        db.execSQL(CREATE_TABLE_NOTIFICATION);
 
-        //CREATE DATA
-
-        String sqlAdmin = "CREATE TABLE Admin(" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "avatar text," +
-                "phone text)";
-        db.execSQL(sqlAdmin);
-        String sqlUser ="CREATE TABLE User(" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "phone text," +
-                "avatar text," +
-                "orderID text)";
-        db.execSQL(sqlUser);
-        String sqlProduct = "CREATE TABLE Product(" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "categoryId integer," +
-                "name text," +
-                "price REAL," +
-                "image text," +
-                "description text," +
-                "FOREIGN KEY (categoryId) REFERENCES categoryId)";
-        db.execSQL(sqlProduct);
-        String sqlCategory="CREATE TABLE Category(" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "name text," +
-                "description text)";
-        db.execSQL(sqlCategory);
-        String sqlOrder = "CREATE TABLE Orders(" +
-                "orderID text PRIMARY KEY," +
-                "total REAL," +
-                "userID INTEGER ," +
-                "FOREIGN KEY (userID) REFERENCES userID)";
-        db.execSQL(sqlOrder);
-        String sqlNotification = "CREATE TABLE Notification(" +
-                "notificationId INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "content text)";
-        db.execSQL(sqlNotification);
-
-        //INSERT DATA....
-        sqlProduct ="INSERT INTO Product(name,price,  image,description ) VALUES('Thanh long ngọt', 5000,'Nội dung gì đó ','Đây là mô ta của món ăn' )";
-        db.execSQL(sqlProduct);
+        // Insert initial data
+        db.execSQL("INSERT INTO " + TABLE_CATEGORY + "(name, description) VALUES('Fruits', 'All kinds of fruits')");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(name, price, image, description, categoryId) VALUES('Thanh long ngọt', 5000, 'mon_an', 'Đây là mô tả của món ăn', 1)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(name, price, image, description, categoryId) VALUES('Thanh long chua', 6000, 'fb_icon', 'Đây là mô tả của món ăn', 1)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(name, price, image, description, categoryId) VALUES('Táo đỏ', 7000, 'gg_icon', 'Đây là mô tả của món ăn', 1)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS User");
-        db.execSQL("DROP TABLE IF EXISTS Admin");
-        db.execSQL("DROP TABLE IF EXISTS Product");
-        db.execSQL("DROP TABLE IF EXISTS Category");
-        db.execSQL("DROP TABLE IF EXISTS Orders");
-        db.execSQL("DROP TABLE IF EXISTS Notification");
-
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADMIN);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ORDERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTIFICATION);
+        onCreate(db);
     }
 }
