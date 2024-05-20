@@ -12,15 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.R;
 import com.example.foodapp.model.Products;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHolder> {
+public class ProductAdminAdapter extends RecyclerView.Adapter<ProductAdminAdapter.MyViewHolder> {
     ArrayList<Products> list;
     Context context;
 
-    public ProductAdapter(ArrayList<Products> list, Context context) {
+    public ProductAdminAdapter(ArrayList<Products> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -36,13 +35,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Products products = list.get(position);
         holder.tvNameFood.setText(products.getName());
-        holder.tvPriceFood.setText(String.valueOf(products.getPrice()));
-
+        holder.tvPriceFood.setText(products.getPrice() + "$");
+        holder.tvDescription.setText(products.getDes());
+        holder.tvTypeOfFood.setText(String.valueOf(products.getTypeName()));  // Convert typeId to String
         String img = products.getImage();
-        // Convert resource name to resource ID
         int resImg = context.getResources().getIdentifier(img, "drawable", context.getPackageName());
         holder.imgFood.setImageResource(resImg);
-
     }
 
     @Override
@@ -52,13 +50,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imgFood;
-        TextView tvNameFood, tvPriceFood;
+        TextView tvNameFood, tvPriceFood, tvDescription, tvTypeOfFood;
 
         public MyViewHolder(@NonNull View view) {
             super(view);
             imgFood = view.findViewById(R.id.imgFood);
             tvNameFood = view.findViewById(R.id.tvNameFood);
             tvPriceFood = view.findViewById(R.id.tvPriceFood);
+            tvDescription = view.findViewById(R.id.tvDescription);
+            tvTypeOfFood = view.findViewById(R.id.tvTypeOfFood);
         }
     }
 }

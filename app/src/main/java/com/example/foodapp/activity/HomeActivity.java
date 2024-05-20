@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.foodapp.R;
-import com.example.foodapp.adapter.ProductAdapter;
+import com.example.foodapp.adapter.ProductAdminAdapter;
 import com.example.foodapp.dao.ProductDAO;
 import com.example.foodapp.model.Products;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,7 +21,7 @@ public class HomeActivity extends AppCompatActivity {
     FloatingActionButton btnAddProduct;
     private ArrayList<Products> listProduct;
     private ProductDAO productDAO;
-    private ProductAdapter productAdapter;
+    private ProductAdminAdapter productAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
 
         productDAO = new ProductDAO(this);
         listProduct = productDAO.getAll();
-        productAdapter = new ProductAdapter(listProduct, this);
+        productAdapter = new ProductAdminAdapter(listProduct, this);
         rcvProduct.setAdapter(productAdapter);
 
         btnAddProduct.setOnClickListener(new View.OnClickListener() {

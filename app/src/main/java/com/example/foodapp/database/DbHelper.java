@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "APP_FOOD";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
 
     private static final String TABLE_ADMIN = "Admin";
     private static final String TABLE_USER = "User";
@@ -67,9 +67,18 @@ public class DbHelper extends SQLiteOpenHelper {
 
         // Insert initial data
         db.execSQL("INSERT INTO " + TABLE_CATEGORY + "(name, description) VALUES('Fruits', 'All kinds of fruits')");
+        db.execSQL("INSERT INTO " + TABLE_CATEGORY + "(name, description) VALUES('Vegetables', 'Various vegetables')");
+        db.execSQL("INSERT INTO " + TABLE_CATEGORY + "(name, description) VALUES('Meat', 'Different types of meat')");
+        db.execSQL("INSERT INTO " + TABLE_CATEGORY + "(name, description) VALUES('Seafood', 'Fresh seafood')");
+        db.execSQL("INSERT INTO " + TABLE_CATEGORY + "(name, description) VALUES('Dairy', 'Dairy products')");
+        db.execSQL("INSERT INTO " + TABLE_CATEGORY + "(name, description) VALUES('Beverages', 'Various drinks')");
+
         db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(name, price, image, description, categoryId) VALUES('Thanh long ngọt', 5000, 'mon_an', 'Đây là mô tả của món ăn', 1)");
         db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(name, price, image, description, categoryId) VALUES('Thanh long chua', 6000, 'fb_icon', 'Đây là mô tả của món ăn', 1)");
         db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(name, price, image, description, categoryId) VALUES('Táo đỏ', 7000, 'gg_icon', 'Đây là mô tả của món ăn', 1)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(name, price, image, description, categoryId) VALUES('Thanh long ngọt', 5000, 'mon_an', 'Đây là mô tả của món ăn', 2)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(name, price, image, description, categoryId) VALUES('Thanh long chua', 6000, 'fb_icon', 'Đây là mô tả của món ăn', 2)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(name, price, image, description, categoryId) VALUES('Táo đỏ', 7000, 'gg_icon', 'Đây là mô tả của món ăn', 2)");
     }
 
     @Override

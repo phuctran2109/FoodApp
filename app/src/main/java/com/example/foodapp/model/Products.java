@@ -3,25 +3,22 @@ package com.example.foodapp.model;
 public class Products {
     private Integer id;
     private String name;
-    private int price;
-    private String description;
+    private Integer price;
+    private String des;
+    private Integer typeId;
+    private String typeName;
     private String image;
 
-    public Products(String name, int price, String description, String image) {
+    public Products(String name, Integer price, String des, Integer typeId, String typeName, String image) {
         this.name = name;
         this.price = price;
-        this.description = description;
+        this.des = des;
+        this.typeId = typeId;
+        this.typeName = typeName;
         this.image = image;
     }
 
-    public Products(Integer id, String name, int price, String description, String image) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.image = image;
-    }
-
+    // Getters and Setters
     public Integer getId() {
         return id;
     }
@@ -38,20 +35,36 @@ public class Products {
         this.name = name;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDes() {
+        return des;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDes(String des) {
+        this.des = des;
+    }
+
+    public Integer getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 
     public String getImage() {
