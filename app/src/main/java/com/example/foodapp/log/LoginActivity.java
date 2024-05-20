@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.foodapp.R;
-import com.example.foodapp.activity.HomeActivity;
+import com.example.foodapp.activity.ManageActivity;
 
 public class LoginActivity extends AppCompatActivity {
     private LinearLayout btnToRegister;
@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                startActivity(new Intent(LoginActivity.this, ManageActivity.class));
             }
         });
     }

@@ -9,6 +9,14 @@ public class Products {
     private String typeName;
     private String image;
 
+    public Products(String name, Integer price, String des, String typeName, String image) {
+        this.name = name;
+        this.price = price;
+        this.des = des;
+        this.typeName = typeName;
+        this.image = image;
+    }
+
     public Products(String name, Integer price, String des, Integer typeId, String typeName, String image) {
         this.name = name;
         this.price = price;
