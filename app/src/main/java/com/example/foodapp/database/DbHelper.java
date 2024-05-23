@@ -26,7 +26,10 @@ public class DbHelper extends SQLiteOpenHelper {
             "id INTEGER PRIMARY KEY AUTOINCREMENT," +
             "phone TEXT," +
             "avatar TEXT," +
-            "orderID TEXT)";
+            "orderID TEXT," +
+            "name TEXT," +
+            "password TEXT)";
+
 
     private static final String CREATE_TABLE_CATEGORY = "CREATE TABLE " + TABLE_CATEGORY + " (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT," +
